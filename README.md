@@ -37,7 +37,7 @@ A bite-size approach reference project for deploying virtualization workloads fo
 
 #### Configuring storage for OCP virtualization
 
-- Configuring a Default Storage Class for OCP Virtualization
+- [Configuring a Default Storage Class for OCP Virtualization](docs/tutorials/configure-default-storage-class.md)
 - Creating Storage Profiles for OCP virtualization
 - Using local storage with HostPath provisioner
 - Creating Storage Classes
