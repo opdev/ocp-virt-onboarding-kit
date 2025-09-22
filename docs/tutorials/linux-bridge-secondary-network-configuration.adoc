@@ -7,6 +7,9 @@ Doing this enables connections to external networks, which includes other pods/V
 
 NOTE: A Linux bridge network attachment definition (NAD) is the simplest way to connect VM(s) to a VLAN.
 
+IMPORTANT: This guide assumes that VMs have already been created in OpenShift Virtualization prior to being modified.
+Parts of this guide will require a namespace to be setup for the VMs which are being attached to a Linux bridge network.
+
 The process is broken down into the following steps:
 
 * <<install_nmstate_operator,Install NMState Operator>> onto the cluster.
@@ -48,7 +51,8 @@ Wait until the web console displays the `Web console update is available` pop up
 
 NOTE: On later versions of OpenShift, you may instead be logged out of the OpenShift console automatically, and you must then re-authenticate.
 
-From the navigation menu, expand *Networking* and check for the *NodeNetworkConfigurationPolicy* and *NodeNetworkState* items. These should both exist before proceeding with <<create_linux_bridge_nncp,creating  NodeNetworkConfigurationPolicy (NNCP)>>.
+From the navigation menu, expand *Networking* and check for the *NodeNetworkConfigurationPolicy* and *NodeNetworkState* items.
+These should both exist before proceeding with <<create_linux_bridge_nncp,creating  NodeNetworkConfigurationPolicy (NNCP)>>.
 
 ==== Procedure using the CLI: [[nmstate_operator_cli_procedure]]
 Before proceeding, authenticate to your OpenShift cluster's API as a cluster-admin.
@@ -264,8 +268,10 @@ The NAD is what allows pods/VMs within a specific project/namespace to connect t
 While not strictly required to create a network attachment definition, a NNCP defining the bridge interface must exist on the cluster before you attach a pod/VM to a bridge network. 
 Neglecting to do so will prevent any VM with a bridge-based NIC from booting.
 
+IMPORTANT: A namespace containing VMs must either exist or be created before proceeding.
+
 ==== Procedure using the CLI: [[create_nad_cli_procedure]]
-It may be necessary to change to the project/namespace of the VMs before proceeding (replace `bridge-demo` with the namespace for where the VMs reside):
+It is necessary to change to the project/namespace of the VMs before proceeding (replace `bridge-demo` with the namespace for where the VMs reside):
 
 ----
 oc project bridge-demo
@@ -364,6 +370,8 @@ Finally, you configure the virtual machine to use the newly created Linux bridge
 
 ==== Prerequisites [[vm_nic_prereqs]]
 The NMState operator, along with the `nmstate`, `nncp` and `network-attachment-definition` resources, should all exist in the cluster (the latter in the respective namespace of the VMs) before proceeding.
+
+The VMs must also already exist in OpenShift Virtualzation before proceeding. The VMs do not have to be running, but changes to running VMs will require restarting (or live migrating) before taking effect.
 
 ==== Procedure using the OpenShift Console: [[vm_nic_console_procedure]]
 Navigate to *Virtualization* > *VirtualMachines*.
