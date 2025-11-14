@@ -1,6 +1,7 @@
 # OpenShift Virtualization Onboarding Kit
 
 **NOTE**: This project has been migrated to a new repository: [OCP Virt Cookbook](https://github.com/RedHatQuickCourses/ocp-virt-cookbook)
+
 The new content is can now be accessed at [Red Hat Quick Courses - OCP Virt Cookbook](https://redhatquickcourses.github.io/ocp-virt-cookbook/ocp-virt-cookbook/1/index.html)
 
 A bite-size approach reference project for deploying virtualization workloads for those who are just starting with OpenShift.
